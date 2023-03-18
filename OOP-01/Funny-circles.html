@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="SpeedDown()">Speed -</button><button onclick="SpeedUp()">Speed +</button><br>
+    <canvas id="myCanvas" width="1080px" height="720px"></canvas>
+    <script>
+        class Circle {
+            constructor(x, y, radius, color, mx, my) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius; //Math.floor(Math.random() * 40 + 40);
+                this.color = color;
+                this.mx = mx;
+                this.my = my;
+            }
+
+            createCircle = function (ctx) {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            moveCircle(canvas) {
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                    this.mx = -this.mx;
+                }
+                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                    this.my = -this.my;
+                }
+                this.x += this.mx;
+                this.y += this.my;
+            }
+
+            increaseSpeed = function(){
+                if(this.mx > 0){
+                    this.mx += 2;
+                }else{
+                    this.mx -= 2;
+                }
+
+                if(this.my > 0){
+                    this.my += 2;
+                }else{
+                    this.my -= 2;
+                }
+            }
+            decreaseSpeed = function(){
+                if(this.mx > 0){
+                    this.mx -= 2;
+                }else{
+                    this.mx = 0;
+                }
+
+                if(this.my > 0){
+                    this.my -= 2;
+                }else{
+                    this.my = 0;
+                }
+            }
+        }
+
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var circlesPack = [];
+
+        function getRandomColor() {
+            var red = getRandomHex();
+            var green = getRandomHex();
+            var blue = getRandomHex();
+            return "rgb(" + red + "," + blue + "," + green + ")";
+        }
+
+        function getRandomHex() {
+            return Math.floor(Math.random() * 255);
+        }
+
+        for(let i=0; i<10; i++){
+            let x = Math.random() * canvas.width;
+            let y = Math.random() * canvas.height;
+            let color = getRandomColor();
+            let radius = Math.floor(Math.random() * 20 + 20);
+            let mx = Math.random() * 5 -5;
+            let my = Math.random() * 5 -5;
+            circlesPack.push(new Circle(x, y, radius, color, mx, my));
+        }
+        
+        function clearCircle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function createAndMoveCircle(){
+            clearCircle();
+            for(let i=0; i<circlesPack.length; i++){
+                circlesPack[i].createCircle(ctx);
+                circlesPack[i].moveCircle(canvas);
+            }
+            requestAnimationFrame(createAndMoveCircle);
+        }
+
+        createAndMoveCircle();
+
+
+        function SpeedUp(){
+            for(let i=0; i<circlesPack.length; i++){
+                circlesPack[i].increaseSpeed();
+            }
+        }
+
+        function SpeedDown(){
+            for(let i=0; i<circlesPack.length; i++){
+                circlesPack[i].decreaseSpeed();
+            }
+        }
+
+    </script>
+</body>
+
+</html>
