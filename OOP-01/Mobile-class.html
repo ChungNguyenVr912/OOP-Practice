@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Mobile{
+            constructor(){
+                this.power = true;
+                this.name = name;
+                this.battery = 100;
+                this.unsent = [];
+                this.sent = [];
+                this.inbox = [];
+            }
+
+            charge = function(){
+                this.battery = 100;
+            }
+
+            powerOn = function(){
+                this.power = true;
+            }
+
+            powerOff = function(){
+                this.power = false;
+            }
+
+            writeMessage = function(mess){
+                if(this.power){
+                    this.unsent.push(mess);
+                    this.battery -= 1;
+                }
+            }
+
+            receiveMessage = function(newMess){
+                if(this.power){
+                    this.inbox.unshift(newMess);
+                    this.battery -= 1;
+                }
+            }
+
+            sendMessage = function(){
+                if(this.power){
+                    let a = this.unsent.pop();
+                    this.sent.unshift(a)
+                    this.battery -= 1;
+                }
+            }
+
+            viewInbox = function(){
+                if(this.power){
+                    this.battery -= 1;
+                    return this.inbox;
+                }
+            }
+
+            viewSentMessage = function(){
+                if(this.power){
+                    this.battery -= 1;
+                    return this.sent;
+                }
+            }
+        }
+
+        var nokia = new Mobile();
+        var samsung = new Mobile();
+
+        nokia.writeMessage("Hello! Are u using Iphone?");
+        nokia.sendMessage();
+        samsung.receiveMessage(nokia.sent[0]);
+        console.log(samsung.viewInbox());
+
+        // samsung.powerOff();
+        nokia.writeMessage("Hello! Are u there?");
+        nokia.sendMessage();
+        samsung.receiveMessage(nokia.sent[0]);
+        console.log(samsung.viewInbox());
+
+
+
+
+    </script>
+</body>
+</html>
