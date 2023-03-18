@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>25<sup>o</sup>C = </span><span id="CtoF"></span><sup>o</sup>F <br>
+    <span>25<sup>o</sup>C = </span><span id="CtoK"></span><sup>o</sup>F <br>
+    <script>
+        class Temperature{
+            constructor(celcius){
+                this.c = celcius;
+            }
+
+            cToF = function(){
+                return this.c * 1.8 + 32;
+            }
+
+            cToK = function(){
+                return this.c + 273.15;
+            }
+        }
+
+        var cel = new Temperature(25);
+
+        document.getElementById('CtoF').innerHTML = cel.cToF();
+        document.getElementById('CtoK').innerHTML = cel.cToK();
+
+    </script>
+</body>
+</html>
