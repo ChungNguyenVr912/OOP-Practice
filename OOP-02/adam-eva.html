@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Apple {
+            constructor(weight) {
+                this.weight = weight;
+            }
+
+            getWeight = function () {
+                return this.weight;
+            }
+
+            setWeight = function (weight) {
+                this.weight = weight;
+            }
+
+            isEmpty = function () {
+                if (this.weight > 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            decrease = function () {
+                if (this.isEmpty() == false) {
+                    this.weight--;
+                }
+            }
+        }
+
+        class Human {
+            constructor(name, gender, weight) {
+                this.name = name;
+                this.gender = gender;
+                this.weight = weight;
+            }
+
+            isMale = function () {
+                if (this.gender == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            setGender = function (gender) {
+                this.gender = gender;
+            }
+
+            checkApple = function (apple) {
+                return apple.isEmpty();
+            }
+
+            eatApple = function (apple1) {
+                apple1.decrease();
+                this.weight++;
+
+            }
+
+            say = function (string) {
+                return string;
+            }
+
+            getName = function () {
+                return this.name;
+            }
+
+            getWeight = function () {
+                return this.weight;
+            }
+
+            setName = function (name) {
+                this.name = name;
+            }
+
+            setWeight = function (weight) {
+                this.weight = weight;
+            }
+        }
+
+        var adam = new Human('Adam', 1, 60);
+        var eva = new Human('Eva', 2, 50);
+        var apple = new Apple(10);
+
+        while (apple.getWeight() >= 0) {
+            if (apple.getWeight() == 0) {
+                document.write("Tao da het. <br>");
+                break;
+            } else {
+                document.write('Adam an 1 mieng tao <br>');
+                adam.eatApple(apple);
+                document.write('Qua tao con ' + apple.getWeight() + ' don vi. <br>');
+                document.write('Can nang cua Adam ' + adam.getWeight() + ' kg <br>');
+            }
+            if (apple.getWeight() == 0) {
+                document.write("Tao da het. <br>");
+                break;
+            } else {
+                document.write('Eva an 1 mieng tao <br>');
+                eva.eatApple(apple);
+                document.write('Qua tao con ' + apple.getWeight() + ' don vi.<br>');
+                document.write('Can nang cua Eva ' + eva.getWeight() + ' kg <br>');
+            }
+        }
+    </script>
+</body>
+
+</html>
