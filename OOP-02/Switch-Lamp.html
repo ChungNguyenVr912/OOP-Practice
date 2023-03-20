@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Lamp {
+            constructor(status) {
+                this.status = status;
+            }
+
+            turnOff = function () {
+                this.status = false;
+            }
+
+            turnOn = function(){
+                this.status = true;
+            }
+        }
+
+        class Switch{
+            constructor(status, lamp){
+                this.status = status;
+                this.lamp = lamp;
+            }
+
+            switchOff = function(){
+                this.status = false;
+                this.lamp.status = false;
+            }
+
+            switchOn = function(){
+                this.status = true;
+                this.lamp.status = true;
+            }
+
+            connectToLamp = function(lamp){
+                this.lamp = lamp;
+            }
+        }
+
+        let lamp01 = new Lamp(false);
+        let lamp02 = new Lamp(false);
+        let switch01 = new Switch(false);
+        
+        console.log("Trang thai sw1");
+        console.log(switch01.status);
+        console.log("Trang thai lamp1");
+        console.log(lamp01.status);
+        console.log("Ket noi toi lamp1");
+        switch01.connectToLamp(lamp01);
+        console.log("sw1 on:");
+        switch01.switchOn();
+        console.log("Trang thai lamp1");
+        console.log(lamp01.status);
+        console.log("Trang thai lamp2");
+        console.log(lamp02.status);
+        console.log("sw1 off:");
+        switch01.switchOff();
+        console.log("Ket noi toi lamp2");
+        switch01.connectToLamp(lamp02);
+        console.log("sw1 on:");
+        switch01.switchOn();
+        console.log("Trang thai lamp1");
+        console.log(lamp01.status);
+        console.log("Trang thai lamp2");
+        console.log(lamp02.status);
+
+    </script>
+</body>
+
+</html>
