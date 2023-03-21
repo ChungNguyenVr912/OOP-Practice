@@ -37,18 +37,12 @@
                 }
             }
 
-            receiveMessage = function(newMess){
-                if(this.power){
-                    this.inbox.unshift(newMess);
-                    this.battery -= 1;
-                }
-            }
-
-            sendMessage = function(){
+            sendMessage = function(mobile){
                 if(this.power){
                     let a = this.unsent.pop();
                     this.sent.unshift(a)
                     this.battery -= 1;
+                    mobile.inbox.unshift(a);
                 }
             }
 
@@ -71,14 +65,12 @@
         var samsung = new Mobile();
 
         nokia.writeMessage("Hello! Are u using Iphone?");
-        nokia.sendMessage();
-        samsung.receiveMessage(nokia.sent[0]);
+        nokia.sendMessage(samsung); 
         console.log(samsung.viewInbox());
 
-        // samsung.powerOff();
+        samsung.powerOff();
         nokia.writeMessage("Hello! Are u there?");
-        nokia.sendMessage();
-        samsung.receiveMessage(nokia.sent[0]);
+        nokia.sendMessage(samsung);
         console.log(samsung.viewInbox());
 
 

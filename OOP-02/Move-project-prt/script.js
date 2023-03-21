@@ -59,8 +59,8 @@ function Hero(image, top, left, size, mx, my) {
   }
 
 }
-var mx = Math.random() * 5 - 5;
-var my = Math.random() * 5 - 5;
+var mx = Math.random() * 5 - 2.5;
+var my = Math.random() * 5 - 2.5;
 var hero = new Hero('run.gif', 20, 30, 200, mx, my);
 
 function start() {
